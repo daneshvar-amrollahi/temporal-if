@@ -1,0 +1,49 @@
+# Papers
+
+One line per verified paper: `- [<id>] <Title> (<Author> et al., <venue> <year>). <claim>. #<tag>`
+
+- [2607.02599] AgentLTL (Elkoussy and Perez, arXiv 2026). FO-LTL specs over tool-call traces as judge-free score, tool-call gate, and dense GRPO reward (Qwen3-4B). #ltl
+- [2512.23738] Agent-C, Enforcing Temporal Constraints for LLM Agents (Kamath et al., arXiv 2025). Temporal DSL to FOL, SMT-checked tool calls with constrained decoding, inference only. #ltl
+- [2503.18666] AgentSpec (Wang et al., ICSE 2026). Trigger-predicate-enforcement rules for agents, per-event, no trajectory properties. #ltl
+- [2605.16198] Formal Methods Meet LLMs (Alamdari et al., arXiv 2026). LTL auditing, predictive and intervening monitors for LLMs and agents. #ltl
+- [2610.09793] Formal Runtime Verification for Tool-Using LLM Agents (Kekatos et al., CPSIoTSec 2026). MFOTL guardrails replayed with MonPoly on AgentDojo/STAC traces. #ltl
+- [2407.05434] LTLBench (Tang et al., arXiv 2024). LLM temporal reasoning over LTL problems with NuSMV ground truth. #ltl
+- [2510.27544] TempoBench (Holzer et al., arXiv 2025). Mealy machines from LTL, LLMs simulate traces well but fail causal minimality. #ltl
+- [2410.15553] Multi-IF (He et al., arXiv 2024). IFEval over 3 turns, 8 languages, cumulative per-response checks. #mt-bench
+- [2409.18216] MMMT-IF (Epstein et al., arXiv 2024). Program-checked global instructions over up to 20 image-QA turns, PIF 0.81 to 0.64. #mt-bench
+- [2511.03508] EvolIF (Jia et al., ACL 2026). Simulated user adds, deletes, modifies per-turn constraints, 9 of 12 constraint groups rule-checked, 3 judged by GPT-4.1, eval only. #mt-bench
+- [2605.06353] SEQUOR (Canaverde et al., arXiv 2026). Up to 50 turns, constraints added and replaced, LLM judge. #mt-bench
+- [2408.10943] SysBench (Qin et al., arXiv 2024). 500 system messages, 5 turns, session stability metric, LLM judge. #mt-bench
+- [2501.17399] MultiChallenge (Sirdeshmukh et al., arXiv 2025). 273 conversations incl. instruction retention, LLM judge with rubrics. #mt-bench
+- [2502.14494] StructFlowBench (Li et al., Findings ACL 2025). Inter-turn structural relations, LLM judge. #mt-bench
+- [2401.16745] MT-Eval (Kwan et al., EMNLP 2024). Recollection, expansion, refinement, follow-up across turns. #mt-bench
+- [2503.13222] MultiTurnInstruct (Han et al., Findings EMNLP 2025). Models recall earlier restrictive instructions but fail to apply them. #mt-bench
+- [2603.22576] CAPITU (Bonás et al., arXiv 2026). Portuguese verifiable IF, 3-turn dialogues. #mt-bench
+- [2505.06120] LLMs Get Lost in Multi-Turn Conversation (Laban et al., arXiv 2025). Sharded instructions, 39% average drop. #mt-rl
+- [2402.10962] Instruction (In)Stability in LM Dialogs (Li et al., COLM 2024). Persona drift within 8 rounds, split-softmax fix. #drift
+- [2609.24532] Prompting Against Persona Drift (Leins et al., arXiv 2026). Reinjection cuts drift 35 to 38%, behavior-specific prompts 87%. #drift
+- [2605.24279] ContextEcho (Ding et al., arXiv 2026). Persona drift in very long Claude Code sessions. #drift
+- [2502.12197] A Closer Look at System Prompt Robustness (Mu et al., arXiv 2025). RealGuardrails data, fine-tuning and guidance improve adherence. #drift
+- [2607.12385] PM-Bench (Liu and Gabriel, COLM 2026). Prospective memory over a simulated week, best F1 65.1. #pm
+- [2606.23459] TriggerBench (Zhang et al., arXiv 2026). Proactive recall of latent constraints, PM decays with context length. #pm
+- [2603.23530] Did You Forget What I Asked? (Mittal, arXiv 2026). Prospective memory for single-response terminal constraints, programmatic checks. #pm
+- [2609.01272] Typed Intention Stores (Zhao and Wu, arXiv 2026). Training-free intention store raises PM-Bench F1. #pm
+- [2511.00222] Consistently Simulating Human Personas with Multi-Turn RL (Abdulhai et al., NeurIPS 2025). Multi-turn PPO with LLM-judge consistency rewards over 60 turns. #mt-rl
+- [2510.18731] RLAAR (Li et al., ACL 2026). Curriculum multi-turn RLVR with accuracy and abstention rewards on sharded tasks. #mt-rl
+- [2603.04783] RLSTA (Chen et al., arXiv 2026). GRPO with single-turn anchor reward for multi-turn stability, 3B to 7B. #mt-rl
+- [2606.12941] Sharding and Memory-Augmented RL (Luo et al., arXiv 2026). RL policy keeps rolling memory over sharded GSM8K. #mt-rl
+- [SAIV 2026, doi 10.1007/978-3-032-32357-6_7] Temporal Guardrails for LLM Conversations / TemporalGuard, LLMrv repo (Cohen, Havelund, Omer, Peled). Past-time LTL over conversation traces with NLI/LLM-grounded propositions, runtime blocking, no IF eval or training. Paper paywalled, verified via repo. #ltl
+- [2311.04235] RuLES (Mu et al., arXiv 2023). Program-checked multi-turn rule scenarios, rules are stateless (depend on last user message only). #mt-bench
+- [2411.14368] RV4Chatbot (arXiv 2024). Runtime verification of rule-based chatbots (Rasa, Dialogflow) against interaction protocols, no LLM instruction following. #ltl
+- [OpenReview 3a8fm24EQd] GLARE (Yan et al., ICML 2026). LLM-written LTL compiled to deterministic automata, automaton transitions as dense GRPO rewards for agents (ALFWorld, web shopping). Verified via ICML poster page. #ltl
+- [2505.11821] MT-GRPO (NeurIPS 2025). Turn-level verifiable rewards and advantages for multi-turn LLM RL. #mt-rl
+- [2606.20068] Process-Verified RL for Theorem Proving via Lean (Kim and Yun, arXiv 2026). GRPO penalizing the verifier-located first failing tactic onward. #mt-rl
+- [2607.21273] The Dark Room in the Reward Channel (arXiv 2026). Dense per-step rewards under GRPO normalization can collapse the policy. #mt-rl
+- [2511.12808] Expressive Temporal Specifications for Reward Monitoring (Adalat and Belardinelli, AAAI 2026). Quantitative LTLf reward monitors with dense rewards, classic RL. #ltl
+- [2601.00596] JourneyBench / Beyond IVR (Balaji et al., arXiv 2026). Customer-support policy adherence over 703 conversations, graph-generated scenarios. Counting policies not stated in abstract. #mt-bench
+- [10.1145/302405.302672] Patterns in Property Specifications for Finite-State Verification (Dwyer, Avrunin, Corbett, ICSE 1999). Catalog of temporal property patterns (absence, universality, existence, bounded existence, precedence, response) under five scopes, with LTL formulas. #fm
+- [IJCAI 2013, p. 854] Linear Temporal Logic and Linear Dynamic Logic on Finite Traces (De Giacomo and Vardi, IJCAI 2013). LTL over finite traces (LTLf) and LDLf, automata-based reasoning, PSPACE-complete. #fm
+- [2507.02833] IFBench (Pyatkin et al., arXiv 2025). 58 unseen verifiable constraints, RLVR improves single-turn instruction following. #if-rlvr
+- [2025.emnlp-main.1542] VerIF (EMNLP 2025). Rule-based plus reasoning-model verification as RL reward for instruction following, VerInstruct data. #if-rlvr
+- [2609.18128] ContrAgent (arXiv 2026). LTLf assume-guarantee contracts compiled to DFAs over tool calls, online gating and offline scoring, no training. #ltl
+- [10.1145/1062455.1062526] Real-time Specification Patterns (Konrad and Cheng, ICSE 2005). Real-time extension of Dwyer's patterns, incl. bounded response and bounded recurrence. #fm
