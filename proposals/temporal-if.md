@@ -129,19 +129,19 @@ The water instruction of Section 3.1 is `EVERY 2, SAY "drink water" GLOBALLY`. "
 
 **LTLf.** Formulas are built from the propositions, Boolean connectives, and the temporal operators `X φ` (φ at the next position), `N φ` (weak next: `X φ`, except true at the last position), `F φ` (φ at some position from here on), `G φ` (φ at every position from here on), `φ U ψ` (until), and `φ W ψ` (weak until, `G φ ∨ φ U ψ`). `X^j` and `N^j` are `X` and `N` applied `j` times, and `F≤w φ` abbreviates `φ ∨ X φ ∨ ... ∨ X^w φ`. A trace satisfies a formula under the usual finite-trace semantics (De Giacomo and Vardi 2013), read from position 1.
 
-**Patterns under the GLOBALLY scope.** Examples are abridged. The real renderings also carry the fixed clauses of Section 4.
+**Patterns under the GLOBALLY scope.** The examples are real instructions, abridged, with their sources and more examples in [real-world-examples.md](../real-world-examples.md). Real instructions are often looser than the formula beside them (the audit prompt never says "and only then"); the benchmark's own renderings, which state the exact pattern, are in Section 4.
 
-| Pattern | LTLf formula | Satisfied iff | Example (abridged) |
+| Pattern | LTLf formula | Satisfied iff | Real example (abridged) |
 |---|---|---|---|
-| `ALWAYS a` | `G a` | `a` at every position | "End every reply with a question." |
-| `NEVER a` | `G ¬a` | `a` at no position | "Never mention Acme." |
-| `EVENTUALLY a` | `F a` | `a` at some position | "At some point in this chat, tell me about the student discount." |
-| `AT n, a` | `(∧_{j=0}^{n-2} X^j ¬a) ∧ X^{n-1}(a ∧ N G ¬a)` | `a` at position `n` and nowhere else | "In your 10th reply from now, say *save your work*, and only then." |
-| `EVERY k, a` | `S_k ∧ G(a → S'_k)`, where `S_k = (∧_{j=0}^{k-2} N^j ¬a) ∧ N^{k-1} a` and `S'_k = (∧_{j=1}^{k-1} N^j ¬a) ∧ N^k a` | `a` at exactly the positions divisible by `k` | "In your 5th, 10th, 15th, ... reply, say *take a break*, and only then." |
-| `EXACTLY m TIMES, a` | `E_m`, where `E_1 = ¬a U (a ∧ N G ¬a)` and `E_j = ¬a U (a ∧ X E_{j-1})` for `j ≥ 2` | `a` at exactly `m` positions | "Mention our newsletter exactly once in this conversation." |
-| `AT MOST m TIMES, a` | `B_m`, where `B_0 = G ¬a` and `B_j = ¬a W (a ∧ N B_{j-1})` | `a` at at most `m` positions | "Mention the premium plan at most once." |
-| `a WITHIN w OF t` | `G(u → F≤w a)` | for every position `i` with `u`: `a` at some position in `i, ..., i + w` (the generator keeps `i + w` inside the segment) | "Whenever I mention a deadline, ask me *what is the date* in that reply." (`w = 0`) |
-| `a AFTER m TIMES t` | `C_m`, where `C_1 = (¬a ∧ ¬u) W (u ∧ a)` and `C_j = (¬a ∧ ¬u) W (u ∧ ¬a ∧ N C_{j-1})` | no `a` before the `m`-th `u`, and `a` at the `m`-th `u`. If `u` occurs fewer than `m` times, no `a` at all. After the `m`-th `u`, `a` is unconstrained | "The second time I say I'm stuck, give me a hint and include the word *hint*, and not before." |
+| `ALWAYS a` | `G a` | `a` at every position | "At the end of every direct answer, always tell the user *If you'd rather talk to a human agent just ask me directly*." (Intercom Fin guide) |
+| `NEVER a` | `G ¬a` | `a` at no position | "From this point forward, do not use any em dashes (—) in your writing under any circumstance." (OpenAI forum) |
+| `EVENTUALLY a` | `F a` | `a` at some position | "If the user is engaging in discussion, try to steer them towards getting in touch via email; ask for their email." (public chatbot prompts) |
+| `AT n, a` | `(∧_{j=0}^{n-2} X^j ¬a) ∧ X^{n-1}(a ∧ N G ¬a)` | `a` at position `n` and nowhere else | "Walk users through a 5-question audit ... After Q5, you MUST deliver the audit." (deployed app prompt) |
+| `EVERY k, a` | `S_k ∧ G(a → S'_k)`, where `S_k = (∧_{j=0}^{k-2} N^j ¬a) ∧ N^{k-1} a` and `S'_k = (∧_{j=1}^{k-1} N^j ¬a) ∧ N^k a` | `a` at exactly the positions divisible by `k` | "Lulu, can you perhaps just react to everd third message in the chat?" (WildChat, typo in original) |
+| `EXACTLY m TIMES, a` | `E_m`, where `E_1 = ¬a U (a ∧ N G ¬a)` and `E_j = ¬a U (a ∧ X E_{j-1})` for `j ≥ 2` | `a` at exactly `m` positions | "Tell the user exactly once per conversation ... Once per conversation means once." (agent skill) |
+| `AT MOST m TIMES, a` | `B_m`, where `B_0 = G ¬a` and `B_j = ¬a W (a ∧ N B_{j-1})` | `a` at at most `m` positions | "Offer the nudge at most once in a conversation." (Anthropic skill) |
+| `a WITHIN w OF t` | `G(u → F≤w a)` | for every position `i` with `u`: `a` at some position in `i, ..., i + w` (the generator keeps `i + w` inside the segment) | "Every time the user types *What can I do here?* ..." followed by a fixed menu (custom GPT, `w = 0`) |
+| `a AFTER m TIMES t` | `C_m`, where `C_1 = (¬a ∧ ¬u) W (u ∧ a)` and `C_j = (¬a ∧ ¬u) W (u ∧ ¬a ∧ N C_{j-1})` | no `a` before the `m`-th `u`, and `a` at the `m`-th `u`. If `u` occurs fewer than `m` times, no `a` at all. After the `m`-th `u`, `a` is unconstrained | "Offer to route the customer to a human agent if they ask the same question twice." (Intercom Fin guide) |
 
 Three remarks. First, what a constant policy achieves. A model that performs the action in every reply passes `ALWAYS`, `EVENTUALLY`, and `WITHIN`. A model that never performs it passes `NEVER` and `AT MOST`, and passes `AFTER m TIMES` only when the `m`-th trigger never comes. Neither passes `AT`, `EVERY`, or `EXACTLY`, and neither passes `AFTER m TIMES` when the `m`-th trigger occurs, because these demand the action at certain replies and forbid it at others (the generator keeps `k ≥ 2` and `m` below the segment length `L`, since `EVERY 1` and `EXACTLY L` are `ALWAYS` and `AT MOST L` constrains nothing). The renderings of `AT` and `EVERY` say so (the nowhere-else clause, Section 4). Whether `WITHIN` and `EVENTUALLY` should also forbid the action outside the required replies is an open design choice (Section 7). Second, every formula in the table is independent of the conversation length, so one automaton per instruction serves any `T`. `EVERY` reads: the first action is at position `k` and none before, and every action is followed by `k - 1` positions without the action and then one with it, where the weak next `N` lets the trace end anywhere. Third, `EXACTLY`, `AT MOST`, and `AFTER m TIMES` nest a one-occurrence formula `m` deep, which is where the counting lives. `EXACTLY` uses strong `X` between occurrences so that an action at the last position cannot stand in for the missing ones.
 
@@ -211,7 +211,7 @@ Scope: a demonstration that the checker works as a training signal, not the pape
 2. Should the model be told `T`? If not, `EVENTUALLY` and `EXACTLY` are best served by acting early, and `EVENTUALLY` may be too easy to keep.
 3. Reply 1 of a user-issued `SAY` instruction is exempt from the phrase check in v1, and the echo rate is reported separately. Should the echo be scored as a violation instead? That is the stricter reading of the instruction, but it would dominate the failure counts for chat models that acknowledge by default.
 4. Lengths beyond the real tail. Only 434 English WildChat conversations have 50+ user turns before the judge, so testing much longer conversations would need stitching. Needed or not?
-5. Ground the patterns in deployed instructions: mine the public RealGuardrails system prompts and WildChat system prompts for count, schedule, and scope rules and report how often each pattern occurs. This turns "we invented a grammar" into "we formalize what users already write".
+5. Grounding (done for existence, not frequency). Every pattern and scope has verified real uses in system prompts, vendor prompt guides, user requests, chat logs, and laws ([real-world-examples.md](../real-world-examples.md)). The thin ones are `AT` (mostly quiz and audit flows), `EXACTLY` with free placement, and `WITHIN` with `w > 0`. Real triggers and actions are mostly semantic, so our literal phrases are a controlled subset. Still open: how often each pattern occurs, e.g. by mining WildChat.
 6. Intent-only renderings ("remind me to drink water" without naming the phrase) need a lenient check such as a keyword set. Evaluation only, or also a reward?
 7. Quantitative instructions that LTLf cannot express compactly, such as a word budget across replies, need arithmetic constraints and a solver. Left out of v1.
 
@@ -223,3 +223,6 @@ Scope: a demonstration that the checker works as a training signal, not the pape
   instructions: [{id, pattern, scope, params, issue_round, placement, text}],
   split }
 ```
+8. Users mostly write `EVERY` as a bounded gap ("at least once every 5 turns"), not an exact period. Add it as a pattern?
+9. The most common real `AT` is `n = 1` ("disclose that you are an AI at the start"), which the generator excludes. Allow it?
+10. Real modes toggle on and off repeatedly ("hold" ... "resume" ... "hold"), but `FROM t UNTIL t'` checks only the first segment. Switch to Dwyer's repeating "between Q and R"?
