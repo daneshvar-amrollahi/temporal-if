@@ -1,5 +1,7 @@
 # Real-world examples of each temporal spec
 
+Spec names are those of grammar v5. In v6 (2026-10-24), `EVENTUALLY` became `EVENTUALLY ... BY` a deadline and `FROM t UNTIL t'` became `EACH TIME t UNTIL t'`. Examples weighted by operational importance, and the v6 constructs, are in [operational-examples.md](operational-examples.md).
+
 2026-10-20. Do the patterns and scopes of `proposals/temporal-if.md` (Section 3.2) occur in real use? For each spec, a searcher agent looked through system prompts, vendor prompt guides, engineering blogs, conversation-design docs, chatbot laws, forums, chat logs (WildChat, ShareGPT) and papers. An adversary agent then fetched every source and challenged each example on four points: is it real use, does the temporal shape match the spec exactly, does it need state across replies, and does it belong to another spec. The two agents iterated for up to three adversary rounds, until they agreed on every example. Every example below has a verified source and a verbatim quote.
 
 **Verdicts.** STRONG: someone actually gives this instruction to an LLM, or an LLM product or a law requires it, and the temporal shape matches. ACCEPT: real and the right shape, but enforced by app code or not written as an instruction to an LLM. VARIANT: real, but the shape differs in a way that matters (wall-clock time, "at least every k", a different count). REJECT: dropped.

@@ -1,0 +1,5 @@
+# Operationally important temporal specs not covered by the grammar
+
+2026-10-23. Searcher/verifier/ranker agent run. Searchers (Opus) look for temporal requirements of operational weight (laws, safety policies, deployed system prompts, platform certification rules, regulated-industry scripts). One-shot verifiers (Sonnet) check the source, the operational claim, the formalization, and that the spec does not reduce to the grammar of `proposals/temporal-if.md` §3.2-3.3. Rankers (Opus) rank the surviving spec families by the importance of their examples.
+
+`covered.py` decides "reduces to the grammar" mechanically: a candidate LTLf formula over per-round atoms (A = assistant reply, U = user message) is covered if it agrees, on ~60-100K traces (exhaustive short, random up to length 10), with one grammar instance or a conjunction of them. Roles are filled conservatively (any Boolean function of same-side atoms for the action and trigger, any literal for scope triggers). `--selftest` checks the grammar implementation against the §3.3 formulas. `--ltl2` tests equivalence of two specs up to renaming.
